@@ -1,0 +1,33 @@
+<div class="container mt-5">
+    <h2>Step 1: Personal Information</h2>
+    <form [formGroup]="form" (ngSubmit)="NextStep()">
+        <!-- Full Name -->
+        <div class="mb-3">
+            <label for="fullName" class="form-label">Full Name <span class="text-danger">*</span></label>
+            <input formControlName="fullName" type="text" id="fullName" class="form-control"
+                placeholder="Enter your full name" minlength="3" required>
+            <div [hidden]="FullName?.valid || FullName?.untouched" class="form-text text-danger">
+
+                <span *ngIf="FullName?.errors?.['required']">Fullname is required</span>
+                <span *ngIf="FullName?.errors?.['minlength']">Minimum length 3 characters</span>
+                <!-- <span>{{FullName?.errors | json}}</span> -->
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+            <input formControlName="email" type="email" id="email" class="form-control"
+                placeholder="Enter a unique email address" required>
+
+            <div [hidden]="Email?.valid || Email?.untouched" class="form-text text-danger">
+
+                <span *ngIf="Email?.errors?.['required']">Email is required</span>
+                <span *ngIf="Email?.errors?.['email']">Wrong email format</span>
+                <span *ngIf="Email?.errors?.['ExistEmail']">Email already exists!</span>
+                <!-- <span>{{Email?.errors | json}}</span> -->
+
+            </div>
+        </div>
+        <button class="btn btn-primary m-2" type="submit" [disabled]="!form.valid"> Next Step </button>
+    </form>
+</div>

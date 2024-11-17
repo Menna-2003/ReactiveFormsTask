@@ -1,0 +1,39 @@
+<div class="container mt-5">
+    <h2>Step 2: Account Information</h2>
+    <form [formGroup]="form" (ngSubmit)="NextStep()">
+        <!-- Password -->
+        <div class="mb-3">
+            <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
+            <input formControlName="password" type="password" id="password" class="form-control"
+                placeholder="Enter your password" minlength="8" required (input)="checkPass()">
+
+            <div [hidden]="Password?.valid || Password?.untouched" class="form-text text-danger">
+                <span *ngIf="Password?.errors?.['required']">Password is required</span>
+            </div>
+            <div [hidden]="Password?.valid || Password?.untouched" class="form-text text-warning">
+                <span *ngIf="Password?.hasError('weakPassword')">Password is weak</span>
+            </div>
+            <div [hidden]="Password?.valid || Password?.untouched" class="form-text text-secondary">
+                <span *ngIf="Password?.hasError('mediumPassword')">Password is medium</span>
+            </div>
+            <div [hidden]=" Password?.untouched || Password.value == ''" class="form-text text-danger">
+                <span *ngIf="Password?.hasError('InvalidPassword')">Password is invalid</span>
+            </div>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="mb-3">
+            <label for="confirmPassword" class="form-label">Confirm Password <span class="text-danger">*</span></label>
+            <input formControlName="confirmPassword" type="password" id="confirmPassword" class="form-control"
+                placeholder="Re-enter your password" required>
+            <div [hidden]="ConfirmPassword?.valid || ConfirmPassword?.untouched" class="form-text text-danger">
+                <span *ngIf="ConfirmPassword?.errors?.['required']">Password is required</span>
+            </div>
+            <div [hidden]="ConfirmPassword?.untouched" class="form-text text-danger">
+                <span *ngIf="form?.errors?.['UnmatchPasswords']">Password doesn't match</span>
+            </div>
+        </div>
+        <button class="btn btn-secondary m-2" (click)="PrevStep()"> previous Step </button>
+        <button class="btn btn-primary m-2" [disabled]="!form.valid"> Next Step </button>
+    </form>
+</div>
