@@ -10,13 +10,13 @@
             <div [hidden]="Password?.valid || Password?.untouched" class="form-text text-danger">
                 <span *ngIf="Password?.errors?.['required']">Password is required</span>
             </div>
-            <div [hidden]="Password?.valid || Password?.untouched" class="form-text text-warning">
+            <div class="form-text text-warning">
                 <span *ngIf="Password?.hasError('weakPassword')">Password is weak</span>
             </div>
-            <div [hidden]="Password?.valid || Password?.untouched" class="form-text text-secondary">
+            <div class="form-text text-secondary">
                 <span *ngIf="Password?.hasError('mediumPassword')">Password is medium</span>
             </div>
-            <div [hidden]=" Password?.untouched || Password.value == ''" class="form-text text-danger">
+            <div [hidden]="Password.value == ''" class="form-text text-danger">
                 <span *ngIf="Password?.hasError('InvalidPassword')">Password is invalid</span>
             </div>
         </div>
